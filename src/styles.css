@@ -22,3 +22,15 @@ label {
   padding: 1px 1px;
   margin: 2px 2px;
 }
+
+.col-valor-header {
+  width: 120px;
+}
+
+.col-valor-content {
+  text-align: right;
+}
+
+.col-data-content {
+  text-align: center;
+}
