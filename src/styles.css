@@ -1,36 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
-body{
-  font-family: Arial, Helvetica, sans-serif;
-  color: #404c51;
-  margin: 0;
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #404c51;
+    margin: 0;
 }
 
 label {
-  font-weight: bold;
-  padding: 1px;
-  margin: 2px;
+    font-weight: bold;
+    padding: 1px;
+    margin: 2px;
 }
 
-@media (min-width: 1200px){
-  .container {
-    width: 1170px;
-    margin: 0 auto;
-  }
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+        margin: 0 auto;
+    }
 }
 
 .formulario {
-  padding: 1px 1px;
-  margin: 2px 2px;
+    padding: 1px 1px;
+    margin: 2px 2px;
 }
 
 .col-valor-header {
-  width: 120px;
+    width: 120px;
 }
 
 .col-valor-content {
-  text-align: right;
+    text-align: right;
 }
 
 .col-data-content {
-  text-align: center;
+    text-align: center;
+}
+
+.col-acoes-header {
+    width: 115px;
+}
+
+.col-acoes {
+    width: 115px;
+    text-align: center !important;
+}
+
+.col-acoes span {
+    padding-left: 2px;
+    margin: 1px 0;
+}
+
+.col-acoes span a {
+    text-decoration: none;
+}
+
+.a-btn {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.a-btn :hover {
+    text-transform: uppercase;
 }
