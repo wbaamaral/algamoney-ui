@@ -96,3 +96,14 @@ label {
     margin-left: 5px !important;
     margin-right: 5px !important;
 }
+
+.navbar {
+    padding: 20px 10px;
+    background-color: #1e94d2;
+}
+
+.navbar i {
+    font-size: 2rem;
+    color: #D8D8D8;
+    font-weight: bold;
+}
