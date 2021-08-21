@@ -19,6 +19,31 @@ label {
     }
 }
 
+@media (min-width: 40em) {
+    .col-valor-header {
+        width: 120px;
+    }
+    .col-valor {
+        text-align: right !important;
+    }
+    .col-data-header {
+        width: 120px;
+    }
+    .col-data {
+        text-align: center !important;
+    }
+    .col-acoes-header {
+        width: 115px;
+    }
+    .col-acoes {
+        width: 115px;
+        text-align: center !important;
+    }
+    .col-acoes .p-button {
+        margin: 1px;
+    }
+}
+
 .formulario {
     padding: 1px 1px;
     margin: 2px 2px;
@@ -45,12 +70,11 @@ label {
     text-align: center !important;
 }
 
-.col-acoes span {
+.col-acoes button {
     padding-left: 2px;
-    margin: 1px 0;
 }
 
-.col-acoes span a {
+.col-acoes a {
     text-decoration: none;
 }
 
