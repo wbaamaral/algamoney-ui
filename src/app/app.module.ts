@@ -6,23 +6,27 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import {TooltipModule} from 'primeng/tooltip';
+import { TagModule } from 'primeng/tag';
 
 import { AppComponent } from './app.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { PesquisarPessoasComponent } from './pesquisar-pessoas/pesquisar-pessoas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LancamentosPesquisaComponent,
-    NavbarComponent
+    NavbarComponent,
+    PesquisarPessoasComponent
   ],
   imports: [
     BrowserModule,
     ButtonModule,
     TooltipModule,
     InputTextModule,
-    TableModule
+    TableModule,
+    TagModule
   ],
   providers: [],
   bootstrap: [AppComponent]
