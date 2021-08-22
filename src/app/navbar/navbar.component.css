@@ -1,0 +1,46 @@
+.navbar {
+    padding: 20px 10px;
+    background-color: #1e94d2;
+}
+
+.navbar i {
+    font-size: 2rem;
+    color: #D8D8D8;
+    font-weight: bold;
+}
+
+.navbar-menu {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    width: 210px;
+    background-color: #3a3633;
+    z-index: 1000000;
+    list-style: none;
+}
+
+.navbar-usuario {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #525151;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 2fr;
+    color: #fff;
+}
+
+.navbar-usuario i {
+    font-size: medium;
+    margin-right: 1pt;
+}
+
+.navbar-menuitem {
+    padding: 15px;
+}
+
+.navbar-menuitem a {
+    color: #c0bbb7;
+    text-decoration: none;
+}

@@ -3,11 +3,20 @@
     <div class="container">
 
         <div class="p-grid">
-            <a href="javascript:;" class="navbar-toggle">
-                <i class="pi pi-bars" pTooltip="Menu geral" tooltipPosition="bottom"></i>
-            </a>
+            <div class="p-col-12">
+                <a href="javascript:;" class="navbar-toggle" (click)="exibindoMenu = !exibindoMenu">
+                    <i class="pi pi-bars" pTooltip="Menu geral" tooltipPosition="bottom"></i>
+                </a>
+            </div>
         </div>
 
     </div>
+
+    <ul class="navbar-menu" [hidden]="!exibindoMenu">
+        <li class="navbar-usuario"> <i class="pi pi-user"></i> José da Silva</li>
+        <li class="navbar-menuitem">Lançamentos</li>
+        <li class="navbar-menuitem">Pessoas</li>
+        <li class="navbar-menuitem">Logout</li>
+    </ul>
 
 </nav>
