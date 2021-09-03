@@ -1,34 +1,29 @@
+import { LancamentoService } from './lancamentos/lancamento.service';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
-import {TooltipModule} from 'primeng/tooltip';
-import { TagModule } from 'primeng/tag';
-
 import { AppComponent } from './app.component';
-import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { PesquisarPessoasComponent } from './pesquisar-pessoas/pesquisar-pessoas.component';
+import { CoreModule } from './core/core.module';
+import { PessoasModule } from './pessoas/pessoas.module';
+import { LancamentosModule } from './lancamentos/lancamentos.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LancamentosPesquisaComponent,
-    NavbarComponent,
-    PesquisarPessoasComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    ButtonModule,
-    TooltipModule,
-    InputTextModule,
-    TableModule,
-    TagModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+
+    CoreModule,
+    LancamentosModule,
+    PessoasModule
   ],
-  providers: [],
+  providers: [LancamentoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
