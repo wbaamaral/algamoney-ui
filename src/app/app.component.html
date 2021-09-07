@@ -7,4 +7,14 @@
   <app-pessoa-cadastro></app-pessoa-cadastro>
   <app-pessoas-pesquisa></app-pessoas-pesquisa>
 -->
-<p-toast position="bottom-right" [showTransformOptions]="'translateX(10%)'" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'120ms'"></p-toast>
+<p-toast position="bottom-right" [showTransformOptions]="'translateX(10%)'" [showTransitionOptions]="'10ms'" [hideTransitionOptions]="'2000ms'"></p-toast>
+
+
+<p-toast></p-toast>
+
+<p-confirmDialog header="Confirmação" icon="pi pi-question-circle" #confirmacao>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-check" label="Sim" (click)="confirmacao.accept()"></button>
+        <button type="button" pButton icon="pi pi-times" label="Não" (click)="confirmacao.reject()"></button>
+    </p-footer>
+</p-confirmDialog>
