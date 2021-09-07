@@ -1,5 +1,11 @@
 # AlgamoneyUi
 
+Projeto gerado automaticamente via [Angular CLI](https://github.com/angular/angular-cli) version 12.2.1.
+Parte integrante do curso [FULLSTACK ANGULAR E SPRING](https://www.algaworks.com/curso/fullstack-angular-e-spring) repositorio do [Backend](https://github.com/wbaamaral/curso.algaworks-algamoneyapi). 
+
+---
+## Angular CLI
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.2.
 
 ## Development server
