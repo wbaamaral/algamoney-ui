@@ -21,6 +21,7 @@ export class LancamentoService {
   pesquisar(filtro: LancamentoFiltro): Promise<any> {
     const headers = new HttpHeaders()
       .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
     let params = new HttpParams()
       .set('page', filtro.pagina.toString())
       .set('size', filtro.itensPorPagina.toString());
