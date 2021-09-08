@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { LazyLoadEvent } from 'primeng/api';
 
-import { PessoaService, PessoaFiltro } from './../pessoa.service.service';
+import { PessoaService, PessoaFiltro } from '../pessoa.service';
 @Component({
   selector: 'app-pessoas-pesquisa',
   templateUrl: './pessoas-pesquisa.component.html',
