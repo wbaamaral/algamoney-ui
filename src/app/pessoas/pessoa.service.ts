@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
+import 'rxjs/add/operator/toPromise';
 export class PessoaFiltro {
   nome: string;
   pagina= 0;
@@ -50,4 +51,14 @@ export class PessoaService {
       .toPromise()
       .then(response => response['content']);
   }
+
+  excluir(codigo: number): Promise<void>{
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.delete(`${this.pessoasUrl}/${codigo}`, { headers })
+      .toPromise()
+      .then(() => null);
+  }
+
 }
