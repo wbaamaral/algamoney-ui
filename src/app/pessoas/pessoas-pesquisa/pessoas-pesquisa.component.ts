@@ -1,7 +1,9 @@
+import { isEmptyExpression } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { LazyLoadEvent, MessageService, ConfirmationService  } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { stringify } from 'querystring';
 
 import { PessoaService, PessoaFiltro } from '../pessoa.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
@@ -48,8 +50,11 @@ export class PessoasPesquisa implements OnInit  {
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;
 
+    if (this.filtro.nome == null || this.filtro.nome == "" )
+      this.filtro.nome = " ";
+
     this.pessoaService.pesquisar(this.filtro)
-      .then(resultado => {
+      .then( resultado => {
         this.totalRegistros = resultado.total;
         this.pessoas = resultado.pessoas;
       })
