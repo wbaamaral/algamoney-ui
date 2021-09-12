@@ -3,7 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
 import { Table } from 'primeng/table';
 
-import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
+import { LancamentoService } from './../lancamento.service';
+import { LancamentoFiltro } from './../lancamento-filtro';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 
 @Component({
