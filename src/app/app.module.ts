@@ -16,6 +16,7 @@ import { LancamentosModule } from './lancamentos/lancamentos.module';
 const rotas: Routes = [
   { path: 'lancamentos', component: LancamentosPesquisaComponent  },
   { path: 'lancamentos/novo', component: LancamentoCadastroComponent },
+  { path: 'lancamentos/:codigo', component: LancamentoCadastroComponent },
   { path: 'pessoas', component: PessoasPesquisa },
   { path: 'pessoas/nova', component: PessoaCadastroComponent}
 ]
