@@ -1,5 +1,5 @@
 import { RouterModule } from '@angular/router';
-import { NgModule, LOCALE_ID  } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
@@ -15,19 +15,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 registerLocaleData(localePt);
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-
-    ToastModule,
-    ConfirmDialogModule,
-  ],
+  imports: [CommonModule, RouterModule, ToastModule, ConfirmDialogModule],
   declarations: [NavbarComponent],
-  exports: [
-    NavbarComponent,
-    ToastModule,
-    ConfirmDialogModule
-  ],
+  exports: [NavbarComponent, ToastModule, ConfirmDialogModule],
   providers: [
     LancamentoService,
     PessoaService,
@@ -35,7 +25,7 @@ registerLocaleData(localePt);
 
     ConfirmationService,
     MessageService,
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
-  ]
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+  ],
 })
-export class CoreModule { }
+export class CoreModule {}

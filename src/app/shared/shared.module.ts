@@ -4,10 +4,8 @@ import { CommonModule } from '@angular/common';
 import { MessageComponent } from './message/message.component';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   declarations: [MessageComponent],
-  exports: [MessageComponent]
+  exports: [MessageComponent],
 })
-export class SharedModule { }
+export class SharedModule {}

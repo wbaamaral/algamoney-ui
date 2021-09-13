@@ -14,8 +14,10 @@ export class Endereco {
   cidade: string;
   estado: string;
 }
+
 export class Categoria {
   codigo: number;
+  descricao: string;
 }
 
 export class Lancamento {
@@ -29,4 +31,3 @@ export class Lancamento {
   pessoa = new Pessoa();
   categoria = new Categoria();
 }
-

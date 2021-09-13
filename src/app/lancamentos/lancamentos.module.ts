@@ -5,17 +5,17 @@ import { CommonModule } from '@angular/common';
 
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { DropdownModule } from 'primeng/dropdown';
-import { SelectButtonModule } from 'primeng/selectbutton';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { SelectButtonModule } from 'primeng/selectbutton';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
 
-import { SharedModule } from './../shared/shared.module';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
+import { SharedModule } from './../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -33,15 +33,9 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
     DropdownModule,
     CurrencyMaskModule,
 
-    SharedModule
+    SharedModule,
   ],
-  declarations: [
-    LancamentoCadastroComponent,
-    LancamentosPesquisaComponent
-  ],
-  exports: [
-    LancamentoCadastroComponent,
-    LancamentosPesquisaComponent
-  ]
+  declarations: [LancamentoCadastroComponent, LancamentosPesquisaComponent],
+  exports: [LancamentoCadastroComponent, LancamentosPesquisaComponent],
 })
-export class LancamentosModule { }
+export class LancamentosModule {}

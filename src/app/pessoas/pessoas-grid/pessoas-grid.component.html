@@ -1,5 +1,4 @@
-<p-table [value]="pessoas" [responsive]="true"
-  [paginator]="true" [rows]="5">
+<p-table [value]="pessoas" [responsive]="true" [paginator]="true" [rows]="5">
   <ng-template pTemplate="header">
     <tr>
       <th>Nome</th>
@@ -26,8 +25,7 @@
       </td>
       <td>
         <span class="p-column-title">Status</span>
-        <a href="javascript:;" [pTooltip]="pessoa.ativo ? 'Desativar' : 'Ativar'"
-            tooltipPosition="top">
+        <a href="javascript:;" [pTooltip]="pessoa.ativo ? 'Desativar' : 'Ativar'" tooltipPosition="top">
           {{ pessoa.ativo ? 'Ativo' : 'Inativo' }}
         </a>
       </td>

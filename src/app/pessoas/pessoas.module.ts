@@ -24,16 +24,13 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
     TooltipModule,
     InputMaskModule,
 
-    SharedModule
+    SharedModule,
   ],
   declarations: [
     PessoaCadastroComponent,
     PessoasGridComponent,
-    PessoasPesquisa
+    PessoasPesquisa,
   ],
-  exports: [
-    PessoaCadastroComponent,
-    PessoasPesquisa
-  ]
+  exports: [PessoaCadastroComponent, PessoasPesquisa],
 })
-export class PessoasModule { }
+export class PessoasModule {}
