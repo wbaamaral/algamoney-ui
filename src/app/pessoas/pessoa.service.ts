@@ -40,21 +40,29 @@ export class PessoaService {
       })
   }
 
-  mudarStatus(codigo: number, ativo: boolean): Promise<void>{
+  mudarStatus(codigo: number, ativo: boolean): Promise<void> {
     const headers = new HttpHeaders()
-    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
-    .append('Content-Type' , 'application/json');
+      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+      .append('Content-Type', 'application/json');
 
-    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo,  {headers})
+    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers })
       .toPromise()
-      .then(()=> null);
+      .then(() => null);
   }
 
-  listarTodas(): Promise<any> {
+  listarTodas(listaGeral: boolean): Promise<any> {
+    let url: string;
+    url = this.pessoasUrl;
+
+    if (listaGeral)
+      url += '?combo&listarTodos=true'
+    else
+      url += '?combo';
+
     const headers = new HttpHeaders()
       .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    return this.http.get(`${this.pessoasUrl}?combo`, { headers })
+    return this.http.get(`${url}`, { headers })
       .toPromise();
   }
 
@@ -69,10 +77,10 @@ export class PessoaService {
 
   adicionar(pessoa: Pessoa): Promise<Pessoa> {
     const headers = new HttpHeaders()
-    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
-    .append('Content-Type', 'application/json');
+      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+      .append('Content-Type', 'application/json');
 
-    return this.http.post<Pessoa>( this.pessoasUrl,
+    return this.http.post<Pessoa>(this.pessoasUrl,
       pessoa, { headers })
       .toPromise();
 

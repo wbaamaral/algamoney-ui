@@ -3,11 +3,11 @@
 
         <div class="p-grid">
             <div class="p-col-12">
-                <h1>Novo Lançamento</h1>
+                <h1>{{ onEdit ? 'Edição de': 'Novo'}} Lançamento</h1>
             </div>
 
             <div class="p-col-12">
-                <p-selectButton [options]="tipos" [(ngModel)]="lancamento.tipo" #tipo></p-selectButton>
+                <p-selectButton name="tipo" [options]="tipos" [(ngModel)]="lancamento.tipo" #tipo></p-selectButton>
             </div>
 
             <div class="p-col-6 p-md-3 p-fluid">
@@ -36,24 +36,24 @@
 
             <div class="p-col-12 p-md-6 p-fluid">
                 <label>Categoria</label>
-                <p-dropdown [options]="categorias" placeholder="Selecione" [(ngModel)]="lancamento.categoria.codigo"></p-dropdown>
+                <p-dropdown [options]="categorias" name="categoria" placeholder="Selecione" [(ngModel)]="lancamento.categoria.codigo"></p-dropdown>
             </div>
 
             <div class="p-col-12 p-md-6 p-fluid">
                 <label>Pessoa</label>
-                <p-dropdown [options]="pessoas" placeholder="Selecione" [filter]="true" [(ngModel)]="lancamento.pessoa.codigo"></p-dropdown>
+                <p-dropdown [options]="pessoas" name="pessoa" placeholder="Selecione" [filter]="true" [(ngModel)]="lancamento.pessoa.codigo"></p-dropdown>
             </div>
 
             <div class="p-col-12 p-fluid">
                 <label>Observação</label>
-                <textarea pInputTextarea rows="3" [(ngModel)]="lancamento.observacao"></textarea>
+                <textarea name="observacao" pInputTextarea rows="3" [(ngModel)]="lancamento.observacao"></textarea>
             </div>
 
             <div class="p-col-12">
-                <button pButton type="submit" label="Salvar" icon="pi pi-save" iconPos="left" [disabled]="f.invalid"></button>
-                <button pButton type="button" label="Novo" icon="pi pi-file-o" iconPos="left" class="p-button-info"></button>
+                <button pButton name="btnSalvar" type="submit" label="Salvar" icon="pi pi-save" iconPos="left" [disabled]="f.invalid"></button>
+                <button pButton name="btnNovo" type="button" label="Novo" icon="pi pi-file-o" iconPos="left" class="p-button-info" [disabled]="onEdit"></button>
 
-                <p-button tooltipPosition="bottom" pTooltip="pesquisa de lançamentos" label="Voltar" icon="pi pi-search" iconPos="left" routerLink="/lancamentos"></p-button>
+                <p-button tooltipPosition="bottom" pTooltip="pesquisa de lançamentos" name="btnVoltar" label="Voltar" icon="pi pi-search" iconPos="left" routerLink="/lancamentos"></p-button>
 
             </div>
         </div>
