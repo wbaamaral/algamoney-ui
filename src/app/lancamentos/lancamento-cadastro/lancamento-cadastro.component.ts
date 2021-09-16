@@ -9,6 +9,7 @@ import { ErrorHandlerService } from './../../core/error-handler.service';
 import { CategoriaService } from './../../categorias/categoria.service';
 import { PessoaService } from './../../pessoas/pessoa.service';
 import { LancamentoService } from './../lancamento.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -33,15 +34,16 @@ export class LancamentoCadastroComponent implements OnInit {
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
-    private router: Router
-  ) { }
+    private router: Router,
+    private title: Title
+  ) {}
 
   ngOnInit() {
     this.codigo = this.route.snapshot.params['codigo'];
 
-    if (this.codigo) {
-      console.log(this.route.snapshot.params['codigo']);
+    this.atualizarTitle('Novo Lançamento');
 
+    if (this.codigo) {
       this.carregarLancamento(this.codigo);
     }
 
@@ -58,6 +60,9 @@ export class LancamentoCadastroComponent implements OnInit {
       .buscarPorcodigo(codigo)
       .then((lancamento) => {
         this.lancamento = lancamento;
+        this.atualizarTitle(
+          `Edição de Lançamento: ${this.lancamento.descricao}`
+        );
       })
       .catch((error) => this.errorHandler.handle(error));
   }
@@ -120,6 +125,7 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   novoLancamento(form: FormControl) {
+    this.atualizarTitle('Novo Lançamento');
     form.reset();
 
     setTimeout(
@@ -130,5 +136,9 @@ export class LancamentoCadastroComponent implements OnInit {
     );
 
     this.router.navigate(['/lancamentos/novo']);
+  }
+
+  atualizarTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
   }
 }

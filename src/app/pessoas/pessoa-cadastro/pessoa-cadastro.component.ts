@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -17,10 +18,13 @@ export class PessoaCadastroComponent implements OnInit {
   constructor(
     private pessoaService: PessoaService,
     private messageService: MessageService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private newTitle: Title
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.newTitle.setTitle('Alamoney: [ Pessoas ]');
+  }
 
   salvar(form: FormControl) {
     this.pessoaService
@@ -36,5 +40,9 @@ export class PessoaCadastroComponent implements OnInit {
         this.pessoa = new Pessoa();
       })
       .catch((erro) => this.errorHandler.handle(erro));
+  }
+
+  atualizarTitle(newTitle: string) {
+    this.newTitle.setTitle(newTitle);
   }
 }

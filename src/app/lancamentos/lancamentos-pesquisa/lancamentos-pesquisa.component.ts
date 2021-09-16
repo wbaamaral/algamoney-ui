@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Table } from 'primeng/table';
@@ -27,13 +28,16 @@ export class LancamentosPesquisaComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
-    private confirmation: ConfirmationService
+    private confirmation: ConfirmationService,
+    private newTitle: Title
   ) {}
 
   ngOnInit() {}
 
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;
+
+    this.newTitle.setTitle("Alamoney: [ Pesquisar Lancamentos ]");
 
     this.lancamentoService
       .pesquisar(this.filtro)

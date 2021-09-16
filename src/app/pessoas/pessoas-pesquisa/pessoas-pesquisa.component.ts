@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {
@@ -24,10 +25,13 @@ export class PessoasPesquisa implements OnInit {
     private pessoaService: PessoaService,
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
-    private confirmation: ConfirmationService
+    private confirmation: ConfirmationService,
+    private newTitle: Title
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.newTitle.setTitle('Alamoney: [ Pesquisar pessoas ]');
+  }
 
   alternarStatus(pessoa: any): void {
     const novoStatus = !pessoa.ativo;
