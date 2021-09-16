@@ -12,6 +12,7 @@ import { PessoasPesquisa } from './pessoas/pessoas-pesquisa/pessoas-pesquisa.com
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { LancamentoCadastroComponent } from './lancamentos/lancamento-cadastro/lancamento-cadastro.component';
 import { LancamentosPesquisaComponent } from './lancamentos/lancamentos-pesquisa/lancamentos-pesquisa.component';
+import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada/pagina-nao-encontrada.component';
 
 const rotas: Routes = [
   { path: '', redirectTo: 'lancamentos', pathMatch: 'full' },
@@ -20,6 +21,8 @@ const rotas: Routes = [
   { path: 'lancamentos/:codigo', component: LancamentoCadastroComponent },
   { path: 'pessoas', component: PessoasPesquisa },
   { path: 'pessoas/nova', component: PessoaCadastroComponent },
+  { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },
+  { path: '**', redirectTo: 'pagina-nao-encontrada' },
 ];
 
 @NgModule({
