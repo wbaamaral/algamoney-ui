@@ -34,7 +34,7 @@ export class LancamentoCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.codigo = this.route.snapshot.params['codigo'];
@@ -98,7 +98,7 @@ export class LancamentoCadastroComponent implements OnInit {
           summary: 'Edição',
           detail: 'Lançamento atualizado com sucesso!',
         });
-        form.reset();
+
         this.router.navigate(['/lancamentos']);
       })
       .catch((error) => this.errorHandler.handle(error));
@@ -107,16 +107,28 @@ export class LancamentoCadastroComponent implements OnInit {
   salvarNovo(form: FormControl) {
     this.lancamentoService
       .adicionar(this.lancamento)
-      .then(() => {
+      .then((lancamentoNovo) => {
         this.messageService.add({
           severity: 'sucess',
           summary: 'Inclusão',
           detail: 'Lançamento incluído com sucesso!',
         });
 
-        form.reset();
-        this.lancamento = new Lancamento();
+        this.router.navigate(['/lancamentos', lancamentoNovo.codigo]);
       })
       .catch((erro) => this.errorHandler.handle(erro));
+  }
+
+  novoLancamento(form: FormControl) {
+    form.reset();
+
+    setTimeout(
+      function () {
+        this.lancamento = new Lancamento();
+      }.bind(this),
+      1
+    );
+
+    this.router.navigate(['/lancamentos/novo']);
   }
 }
