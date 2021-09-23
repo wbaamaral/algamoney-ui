@@ -1,96 +1,81 @@
-import { Title } from '@angular/platform-browser';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { IPessoa, IPessoaFiltro } from 'src/app/core/interfaces';
+import { PessoaService } from '../pessoa.service';
 
-import {
-  LazyLoadEvent,
-  MessageService,
-  ConfirmationService,
-} from 'primeng/api';
-import { Table } from 'primeng/table';
-
-import { PessoaService, PessoaFiltro } from '../pessoa.service';
-import { ErrorHandlerService } from './../../core/error-handler.service';
 @Component({
   selector: 'app-pessoas-pesquisa',
   templateUrl: './pessoas-pesquisa.component.html',
-  styleUrls: ['./pessoas-pesquisa.component.css'],
+  styleUrls: ['./pessoas-pesquisa.component.css']
 })
-export class PessoasPesquisa implements OnInit {
+export class PessoasPesquisaComponent{
   totalRegistros = 0;
-  filtro = new PessoaFiltro();
-  pessoas = [];
+  filtro: IPessoaFiltro = {
+    pagina: 0,
+    itensPorPagina: 5
+  };
+  pessoas: IPessoa[] = [];
+  @ViewChild('tabela') grid: any;
 
-  @ViewChild('tabelaPessoas') grid: Table;
   constructor(
     private pessoaService: PessoaService,
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
-    private confirmation: ConfirmationService,
-    private newTitle: Title
-  ) {}
+    private confirmationService: ConfirmationService
+  ) { }
 
-  ngOnInit() {
-    this.newTitle.setTitle('Alamoney: [ Pesquisar pessoas ]');
+  pesquisar(pagina: number = 0): void {        
+    this.filtro.pagina = pagina;
+    
+    this.pessoaService.pesquisar(this.filtro)
+      .subscribe(
+        dados => {
+          this.pessoas = dados.content
+          this.totalRegistros = dados.totalElements         
+        },
+        erro => this.errorHandler.handle(erro)
+      );
+  }
+
+  aoMudarPagina(event: LazyLoadEvent) {
+      const pagina = event!.first! / event!.rows!;
+      this.pesquisar(pagina);
+  }
+  
+  confirmarExclusao(pessoa: IPessoa): void {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja excluir?',
+      accept: () => {
+          this.excluir(pessoa);
+      }
+    });
+  }
+
+  excluir(pessoa: IPessoa) {
+
+    this.pessoaService.excluir(pessoa.codigo)
+      .subscribe(
+        () => {
+          this.grid.reset();
+
+          this.messageService.add({ severity: 'success', detail: 'Pessoa excluída com sucesso!' })
+        },
+        (error) => this.errorHandler.handle(error) 
+      )      
   }
 
   alternarStatus(pessoa: any): void {
     const novoStatus = !pessoa.ativo;
 
-    this.pessoaService
-      .mudarStatus(pessoa.codigo, novoStatus)
-      .then(() => {
+    this.pessoaService.mudarStatus(pessoa.codigo, novoStatus).subscribe(
+      () => {
         const acao = novoStatus ? 'ativada' : 'desativada';
 
         pessoa.ativo = novoStatus;
-
-        this.messageService.add({
-          severity: 'sucess',
-          detail: `Pessoa ${acao} com sucesso!`,
-        });
-      })
-      .catch((erro) => this.errorHandler.handle(erro));
-  }
-
-  pesquisar(pagina = 0) {
-    this.filtro.pagina = pagina;
-
-    if (this.filtro.nome == null || this.filtro.nome == '')
-      this.filtro.nome = ' ';
-
-    this.pessoaService
-      .pesquisar(this.filtro)
-      .then((resultado) => {
-        this.totalRegistros = resultado.total;
-        this.pessoas = resultado.pessoas;
-      })
-      .catch((erro) => this.errorHandler.handle(erro));
-  }
-
-  confirmarExclusao(pessoa: any) {
-    this.confirmation.confirm({
-      message: 'Tem certeza que deseja excluir?',
-      accept: () => {
-        this.excluir(pessoa);
+        this.messageService.add({ severity: 'success', detail: `Pessoa ${acao} com sucesso!` });
       },
-    });
+      erro => this.errorHandler.handle(erro));
   }
 
-  aoMudarPagina(event: LazyLoadEvent) {
-    const pagina = event.first / event.rows;
-    this.pesquisar(pagina);
-  }
-
-  excluir(pessoa: any) {
-    this.pessoaService
-      .excluir(pessoa.codigo)
-      .then(() => {
-        this.grid.reset();
-        this.messageService.add({
-          severity: 'sucess',
-          summary: 'Exclusão',
-          detail: 'Lançamento excluído com sucesso!',
-        });
-      })
-      .catch((erro) => this.errorHandler.handle(erro));
-  }
 }

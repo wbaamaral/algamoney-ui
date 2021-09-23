@@ -1,22 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import { CurrencyMaskModule } from 'ng2-currency-mask';
-import { DropdownModule } from 'primeng/dropdown';
-import { CalendarModule } from 'primeng/calendar';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
+import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
-import { SharedModule } from './../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
+import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   imports: [
@@ -36,9 +38,13 @@ import { SharedModule } from './../shared/shared.module';
 
     CurrencyMaskModule,
 
-    SharedModule,
+    SharedModule
   ],
-  declarations: [LancamentoCadastroComponent, LancamentosPesquisaComponent],
-  exports: [LancamentoCadastroComponent, LancamentosPesquisaComponent],
+  declarations: [
+    LancamentoCadastroComponent,
+    LancamentosPesquisaComponent,
+    LancamentosGridComponent
+  ],
+  exports: []
 })
-export class LancamentosModule {}
+export class LancamentosModule { }
