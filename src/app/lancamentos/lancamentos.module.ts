@@ -1,7 +1,8 @@
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { DropdownModule } from 'primeng/dropdown';
@@ -21,6 +22,7 @@ import { SharedModule } from './../shared/shared.module';
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     RouterModule,
 
     InputTextModule,
@@ -31,6 +33,7 @@ import { SharedModule } from './../shared/shared.module';
     CalendarModule,
     SelectButtonModule,
     DropdownModule,
+
     CurrencyMaskModule,
 
     SharedModule,

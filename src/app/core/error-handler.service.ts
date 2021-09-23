@@ -3,12 +3,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { MessageService } from 'primeng/api';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ErrorHandlerService {
   constructor(private messageService: MessageService) {}
 
   handle(errorResponse: any) {
     let msg: string;
+    console.log(errorResponse);
 
     if (typeof errorResponse === 'string') {
       msg = errorResponse;

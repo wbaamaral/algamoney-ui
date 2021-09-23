@@ -5,22 +5,13 @@ import * as moment from 'moment';
 
 import { Lancamento } from './../core/model';
 import { LancamentoFiltro } from './lancamento-filtro';
+import { DatePipe } from '@angular/common';
 
 @Injectable()
 export class LancamentoService {
   lancamentosUrl = 'http://localhost:8080/lancamentos';
 
-  constructor(private http: HttpClient) {}
-
-  adicionar(lancamento: Lancamento): Promise<Lancamento> {
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
-      .append('Content-Type', 'application/json');
-
-    return this.http
-      .post<Lancamento>(this.lancamentosUrl, lancamento, { headers })
-      .toPromise();
-  }
+  constructor(private http: HttpClient, private datePipe: DatePipe) {}
 
   private converterStringParaDatas(lancamentos: Lancamento[]) {
     for (const lancamento of lancamentos) {
@@ -97,6 +88,16 @@ export class LancamentoService {
 
         return lancamento;
       });
+  }
+
+  adicionar(lancamento: Lancamento): Promise<Lancamento> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+      .append('Content-Type', 'application/json');
+
+    return this.http
+      .post<Lancamento>(this.lancamentosUrl, lancamento, { headers })
+      .toPromise();
   }
 
   atualizar(lancamento: Lancamento): Promise<Lancamento> {
