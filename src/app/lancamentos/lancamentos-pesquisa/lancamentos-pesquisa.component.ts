@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
@@ -22,27 +23,29 @@ export class LancamentosPesquisaComponent implements OnInit {
   totalRegistros: number = 0
   lancamentos: ILancamento[] = [] ;
   @ViewChild('tabela') grid: any;
-  
+
   constructor(
     private lancamentoService: LancamentoService,
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private title: Title
   ) {}
 
   ngOnInit() {
+    this.title.setTitle('Pesquisa de Lancamentos');
   }
-  
-  pesquisar(pagina: number = 0): void {        
+
+  pesquisar(pagina: number = 0): void {
     this.filtro.pagina = pagina;
-    
+
     this.lancamentoService.pesquisar(this.filtro)
       .subscribe(
         (dados) => {
           this.lancamentos = dados.content
-          this.totalRegistros = dados.totalElements  
+          this.totalRegistros = dados.totalElements
         },
-        (erro) => this.errorHandler.handle(erro)          
+        (erro) => this.errorHandler.handle(erro)
       );
   }
 
@@ -73,9 +76,9 @@ export class LancamentosPesquisaComponent implements OnInit {
 
           this.messageService.add({ severity: 'success', detail: 'Lançamento excluído com sucesso!' })
         },
-        (error) => this.errorHandler.handle(error) 
+        (error) => this.errorHandler.handle(error)
       )
-      
+
   }
 
 }

@@ -6,31 +6,31 @@
         <div class="p-col-12">
           <h1>Lançamentos</h1>
         </div>
-    
+
         <div class="p-col-12 p-fluid">
           <label>Descrição</label>
-          <input pInputText type="text" name="descricao" 
+          <input pInputText type="text" name="descricao"
             [(ngModel)]="filtro.descricao">
         </div>
-    
+
         <div class="p-col-12">
           <label style="display: block">Vencimento</label>
-          
+
           <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
             name="vencimentoInicio" [(ngModel)]="filtro.dataVencimentoInicio"></p-calendar>
-    
+
           <label class="label">até</label>
           <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
             name="vencimentoFim" [(ngModel)]="filtro.dataVencimentoFim"></p-calendar>
         </div>
-    
+
         <div class="p-col-12">
           <button pButton type="submit" label="Pesquisar"></button>
         </div>
-        
+
     </div>
-  </form>  
-      
+  </form>
+
   <div class="p-grid">
     <div class="p-col-12">
       <p-table [value]="lancamentos" [responsive]="true"
@@ -94,6 +94,6 @@
     </div>
   </div>
 
-  <a pButton label="Novo Lançamento" routerLink="/lancamentos/novo"></a>
+  <a pButton label="Novo Lançamento" [routerLink]="['/lancamentos/novo']"></a>
 
 </div>

@@ -16,14 +16,14 @@ export class PessoaService {
 
     const headers = new HttpHeaders()
       .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-      
+
     let params = new HttpParams()
                       .set('page', filtro.pagina)
                       .set('size', filtro.itensPorPagina);
 
     if (filtro.nome) {
       params = params.set('nome', filtro.nome);
-    }   
+    }
 
     return this.http.get<IApiResponse<IPessoa>>(`${this.pessoasUrl}`, { headers, params });
   }
@@ -35,7 +35,7 @@ export class PessoaService {
     return this.http.get<IApiResponse<IPessoa>>(`${this.pessoasUrl}`, { headers });
   }
 
-  excluir(codigo: number) : Observable<void> {    
+  excluir(codigo: number) : Observable<void> {
     const headers = new HttpHeaders()
       .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
@@ -54,7 +54,15 @@ export class PessoaService {
     const headers = new HttpHeaders()
       .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
       .append('Content-Type', 'application/json');
-  
+
     return this.http.post<IPessoa>(this.pessoasUrl, pessoa, { headers });
+  }
+
+  buscarPorCodigo(codigo: number): Observable<IPessoa>{
+    const headers = new HttpHeaders()
+    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.get<IPessoa>(`${this.pessoasUrl}/${codigo}`, { headers });
+
   }
 }

@@ -28,7 +28,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   imports: [
     CommonModule,
     RouterModule,
-        
+
     ToastModule,
     ConfirmDialogModule,
 
@@ -49,7 +49,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   providers: [
     DatePipe,
     ErrorHandlerService,
-    
+
     MessageService,
     ConfirmationService,
     TranslateService
