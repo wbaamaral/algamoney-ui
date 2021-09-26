@@ -85,7 +85,7 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   carregarPessoas() {
-    this.pessoaService.listarTodas().subscribe(
+    this.pessoaService.listarCombo().subscribe(
       (dados) => {
         this.pessoas = dados.content.map((dado: IPessoa) => ({
           label: dado.nome,
