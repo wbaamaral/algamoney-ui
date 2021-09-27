@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { IApiResponse, IPessoa, IPessoaFiltro } from '../core/interfaces';
-import { url } from 'inspector';
 
 @Injectable({
   providedIn: 'root',
@@ -33,20 +32,12 @@ export class PessoaService {
     });
   }
 
-  listarCombo(): Observable<IPessoa> {
-    let comboPessoas: string;
-    comboPessoas = this.pessoasUrl;
+  listarCombo(): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    comboPessoas += '?combo&listarTodos=false';
-
-    const headers = new HttpHeaders().append(
-      'Authorization',
-      'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg=='
-    );
-
-    return this.http.get<IPessoa>(`${comboPessoas}`, {
-      headers,
-    });
+    return this.http.get(`${this.pessoasUrl}?combo`, { headers })
+      .toPromise();
   }
 
   listarTodas(): Observable<IApiResponse<IPessoa>> {

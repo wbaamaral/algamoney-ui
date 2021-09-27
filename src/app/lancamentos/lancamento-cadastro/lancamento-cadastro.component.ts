@@ -85,17 +85,12 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   carregarPessoas() {
-    this.pessoaService.listarCombo().subscribe(
-      (dados) => {
-        this.pessoas = dados.content.map((dado: IPessoa) => ({
-          label: dado.nome,
-          value: dado.codigo,
-        }));
-      },
-      (erro) => {
-        this.errorHandler.handle(erro);
-      }
-    );
+    return this.pessoaService
+      .listarCombo()
+      .then((pessoas) => {
+        this.pessoas = pessoas.map( (pessoa: any) => ({label: pessoa.nome, value: pessoa.codigo}));
+      })
+      .catch((error) => this.errorHandler.handle(error));
   }
 
   salvar(lancamentoForm: NgForm) {
