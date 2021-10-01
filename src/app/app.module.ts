@@ -12,6 +12,7 @@ import { LancamentosPesquisaComponent } from './lancamentos/lancamentos-pesquisa
 import { LancamentoCadastroComponent } from './lancamentos/lancamento-cadastro/lancamento-cadastro.component';
 import { PessoasPesquisaComponent } from './pessoas/pessoas-pesquisa/pessoas-pesquisa.component';
 import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.component';
+import { SegurancaModule } from './seguranca/seguranca.module';
 
 const routes: Routes = [
   { path: '', redirectTo: 'lancamentos', pathMatch: 'full' },
@@ -35,7 +36,8 @@ const routes: Routes = [
 
     CoreModule,
     LancamentosModule,
-    PessoasModule
+    PessoasModule,
+    SegurancaModule
   ],
   providers: [  ],
   bootstrap: [AppComponent]
