@@ -7,16 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login-form.component.css'],
 })
 export class LoginFormComponent implements OnInit {
-  constructor(private auth: AuthService) {}
+  constructor(public auth: AuthService) {}
 
   ngOnInit(): void {}
 
   login(usuario: string, senha: string) {
     this.auth.login(usuario, senha).subscribe(
-      (response) => {
+      (response: any) => {
+        this.auth.armazenarToken(response.access_token);
         console.log(response);
       },
-      (response) => {
+      (response: any) => {
         console.log(response);
       }
     );
