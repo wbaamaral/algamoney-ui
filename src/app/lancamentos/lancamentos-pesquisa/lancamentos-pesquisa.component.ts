@@ -1,5 +1,4 @@
 import { Title } from '@angular/platform-browser';
-import { ErrorHandlerService } from './../../core/error-handler.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {
@@ -8,9 +7,11 @@ import {
   MessageService,
 } from 'primeng/api';
 
-import { ILancamento } from 'src/app/core/interfaces';
+import { AuthService } from './../../seguranca/auth.service';
+import { ILancamento } from './../../core/interfaces';
 import { ILancamentoFiltro } from './../../core/interfaces';
 import { LancamentoService } from './../lancamento.service';
+import { ErrorHandlerService } from './../../core/error-handler.service';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -31,11 +32,16 @@ export class LancamentosPesquisaComponent implements OnInit {
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private confirmationService: ConfirmationService,
-    private title: Title
+    private title: Title,
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
     this.title.setTitle('Pesquisa de Lancamentos');
+  }
+
+  temPermissao(role: string):boolean{
+   return  this.auth.temPermissao(role)
   }
 
   pesquisar(pagina: number = 0): void {

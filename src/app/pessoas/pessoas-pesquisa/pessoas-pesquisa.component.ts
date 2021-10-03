@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { Pessoa } from './../../core/model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
@@ -33,13 +34,17 @@ export class PessoasPesquisaComponent implements OnInit {
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private confirmationService: ConfirmationService,
-    private title: Title
+    private title: Title,
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
     this.title.setTitle('Pesquisa de pessoas');
   }
 
+  temPermissao(role: string): boolean {
+    return this.auth.temPermissao(role);
+  }
   pesquisar(pagina: number = 0): void {
     this.filtro.pagina = pagina;
 

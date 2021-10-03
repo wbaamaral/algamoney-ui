@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -24,7 +25,8 @@ export class PessoaCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title
+    private title: Title,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +37,10 @@ export class PessoaCadastroComponent implements OnInit {
       this.carregarPessoa(codigoPessoa);
       this.atualizarTituloEdicao();
     }
+  }
+
+  temPermissao(role: string): boolean {
+    return this.auth.temPermissao(role);
   }
 
   get editando() {

@@ -1,3 +1,4 @@
+import { AuthService } from './../../seguranca/auth.service';
 import { map } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
@@ -37,7 +38,8 @@ export class LancamentoCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title
+    private title: Title,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +56,10 @@ export class LancamentoCadastroComponent implements OnInit {
 
   get editando() {
     return Boolean(this.lancamento.codigo);
+  }
+
+  temPermissao(role: string): boolean {
+    return this.auth.temPermissao(role);
   }
 
   carregarLancamento(codigo: number) {
