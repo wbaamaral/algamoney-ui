@@ -39,6 +39,12 @@ export interface IPessoa {
     ativo: boolean
 }
 
+export interface IComboPessoa {
+  codigo: number,
+  nome: string,
+  ativo: boolean
+}
+
 export interface ILancamentoFiltro {
     descricao?: string,
     dataVencimentoInicio?: Date,

@@ -1,10 +1,11 @@
+import { map } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { MessageService } from 'primeng/api';
 
-import { IPessoa, ILancamento } from './../../core/interfaces';
+import { IPessoa, ILancamento, IComboPessoa } from './../../core/interfaces';
 import { Lancamento } from './../../core/model';
 import { LancamentoService } from '../lancamento.service';
 import { PessoaService } from './../../pessoas/pessoa.service';
@@ -81,17 +82,16 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   carregarPessoas() {
-    this.pessoaService.listarTodas().subscribe(
-      (dados) => {
-        this.pessoas = dados.content.map((dado: IPessoa) => ({
-          label: dado.nome,
-          value: dado.codigo,
+    return this.pessoaService
+      .listarPessoasCombo()
+      .toPromise()
+      .then((pessoas: any) => {
+        this.pessoas = pessoas.map((pessoa: IComboPessoa) => ({
+          label: pessoa.nome,
+          value: pessoa.codigo,
         }));
-      },
-      (erro) => {
-        this.errorHandler.handle(erro);
-      }
-    );
+      })
+      .catch((error: any) => this.errorHandler.handle(error));
   }
 
   salvar(lancamentoForm: NgForm) {
