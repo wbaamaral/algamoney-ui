@@ -4,18 +4,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoriaService {
-
   categoriasUrl = 'http://localhost:8080/categorias';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   listarTodas(): Observable<ICategoria[]> {
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.http.get<ICategoria[]>(this.categoriasUrl, { headers });
+    return this.http.get<ICategoria[]>(this.categoriasUrl);
   }
 }

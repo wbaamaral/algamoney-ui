@@ -40,12 +40,13 @@ export class LancamentoCadastroComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Novo Lancamento');
+    this.title.setTitle('Novo Lançamento');
     const codigoLancamento = this.route.snapshot.params['codigo'];
 
     if (codigoLancamento) {
       this.carregarLancamento(codigoLancamento);
     }
+
     this.carregarCategorias();
     this.carregarPessoas();
   }
@@ -59,12 +60,7 @@ export class LancamentoCadastroComponent implements OnInit {
       (lancamento) => {
         this.converterStringsParaDatas([lancamento]);
         this.lancamento = lancamento;
-        if (this.editando) {
-          this.atualizarTitulo(
-            'Editando Lançamento',
-            this.lancamento.descricao
-          );
-        }
+        this.atualizarTituloEdicao();
       },
       (erro) => this.errorHandler.handle(erro)
     );
@@ -85,12 +81,17 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   carregarPessoas() {
-    return this.pessoaService
-      .listarCombo()
-      .then((pessoas) => {
-        this.pessoas = pessoas.map( (pessoa: any) => ({label: pessoa.nome, value: pessoa.codigo}));
-      })
-      .catch((error) => this.errorHandler.handle(error));
+    this.pessoaService.listarTodas().subscribe(
+      (dados) => {
+        this.pessoas = dados.content.map((dado: IPessoa) => ({
+          label: dado.nome,
+          value: dado.codigo,
+        }));
+      },
+      (erro) => {
+        this.errorHandler.handle(erro);
+      }
+    );
   }
 
   salvar(lancamentoForm: NgForm) {
@@ -111,7 +112,7 @@ export class LancamentoCadastroComponent implements OnInit {
           severity: 'success',
           detail: 'Lançamento alterado com sucesso!',
         });
-        this.atualizarTitulo('Editando Lançamento', this.lancamento.descricao);
+        this.atualizarTituloEdicao();
       },
       (erro) => this.errorHandler.handle(erro)
     );
@@ -124,7 +125,6 @@ export class LancamentoCadastroComponent implements OnInit {
           severity: 'success',
           detail: 'Lançamento adicionado com sucesso!',
         });
-        this.atualizarTitulo('Novo Lançamento', '***');
 
         this.router.navigate(['/lancamentos', lancamentoAdicionado.codigo]);
       },
@@ -148,7 +148,7 @@ export class LancamentoCadastroComponent implements OnInit {
     }
   }
 
-  private atualizarTitulo(acao: string, descricao: string) {
-    this.title.setTitle(`${acao}: ${descricao}`);
+  private atualizarTituloEdicao() {
+    this.title.setTitle(`Edição de lançamento: ${this.lancamento.descricao}`);
   }
 }

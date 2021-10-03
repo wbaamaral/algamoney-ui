@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-import { Observable } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   oauthTokenUrl = 'http://localhost:8080/oauth/token';
-  jwtPlayload: any;
+  jwtPayload: any;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
     this.carregarToken();
@@ -26,8 +26,8 @@ export class AuthService {
   }
 
   public armazenarToken(token: string) {
-    this.jwtPlayload = this.jwtHelper.decodeToken(token);
-    console.log(this.jwtPlayload);
+    this.jwtPayload = this.jwtHelper.decodeToken(token);
+    console.log(this.jwtPayload);
 
     localStorage.setItem('token', token);
   }

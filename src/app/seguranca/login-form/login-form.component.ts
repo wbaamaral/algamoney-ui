@@ -30,7 +30,7 @@ export class LoginFormComponent implements OnInit {
 
         if (response.status === 400){
           if (response.error.error === 'invalid_grant'){
-            erro = 'Usuário ou Senha Inválida'
+            erro = 'Usuário ou Senha Inválido'
           }
         }
         this.erroHandler.handle(erro);

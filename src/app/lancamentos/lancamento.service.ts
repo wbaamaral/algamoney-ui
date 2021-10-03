@@ -18,11 +18,6 @@ export class LancamentoService {
   constructor(private http: HttpClient, private datePipe: DatePipe) {}
 
   pesquisar(filtro: ILancamentoFiltro): Observable<IApiResponse<ILancamento>> {
-    const headers = new HttpHeaders().append(
-      'Authorization',
-      'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg=='
-    );
-
     let params = new HttpParams()
       .set('page', filtro.pagina)
       .set('size', filtro.itensPorPagina);
@@ -47,25 +42,19 @@ export class LancamentoService {
 
     return this.http.get<IApiResponse<ILancamento>>(
       `${this.lancamentosUrl}?resumo`,
-      { headers, params }
+      { params }
     );
   }
 
   excluir(codigo: number): Observable<void> {
-    const headers = new HttpHeaders().append(
-      'Authorization',
-      'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg=='
-    );
-
-    return this.http.delete<void>(`${this.lancamentosUrl}/${codigo}`, {
-      headers,
-    });
+    return this.http.delete<void>(`${this.lancamentosUrl}/${codigo}`);
   }
 
   adicionar(lancamento: ILancamento): Observable<ILancamento> {
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
-      .append('Content-Type', 'application/json');
+    const headers = new HttpHeaders().append(
+      'Content-Type',
+      'application/json'
+    );
 
     return this.http.post<ILancamento>(this.lancamentosUrl, lancamento, {
       headers,
@@ -73,9 +62,10 @@ export class LancamentoService {
   }
 
   atualizar(lancamento: ILancamento): Observable<ILancamento> {
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
-      .append('Content-Type', 'application/json');
+    const headers = new HttpHeaders().append(
+      'Content-Type',
+      'application/json'
+    );
 
     return this.http.put<ILancamento>(
       `${this.lancamentosUrl}/${lancamento.codigo}`,
@@ -85,13 +75,6 @@ export class LancamentoService {
   }
 
   buscarPorCodigo(codigo: number): Observable<ILancamento> {
-    const headers = new HttpHeaders().append(
-      'Authorization',
-      'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg=='
-    );
-
-    return this.http.get<ILancamento>(`${this.lancamentosUrl}/${codigo}`, {
-      headers,
-    });
+    return this.http.get<ILancamento>(`${this.lancamentosUrl}/${codigo}`);
   }
 }
