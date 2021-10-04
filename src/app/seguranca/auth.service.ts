@@ -25,10 +25,52 @@ export class AuthService {
     return this.http.post<void>(this.oauthTokenUrl, body, { headers });
   }
 
+  obterNovoAccessToken(): Observable<void> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/x-www-form-urlencoded')
+      .append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+
+    const body = 'grant_type=refresh_token';
+
+    return this.http
+      .post<void>(this.oauthTokenUrl, body, { headers, withCredentials: true })
+      .pipe(
+        map((response: any) => {
+          console.log('Novo access token criado');
+
+          this.armazenarToken(response.access_token);
+          return response;
+        })
+      )
+      .pipe(
+        catchError((response) => {
+          console.error('Erro ao renovar token', response);
+          return throwError(null);
+        })
+      );
+  }
+
+  isAccessTokenInvalido() {
+    const token = localStorage.getItem('token');
+    return !token || this.jwtHelper.isTokenExpired(token);
+  }
+
+  temPermissao(permissao: string) {
+    return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+  }
+
+  temQualquerPermissao(roles: any) {
+    for (const role of roles) {
+      if (this.temPermissao(role)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   public armazenarToken(token: string) {
     this.jwtPayload = this.jwtHelper.decodeToken(token);
-    console.log(this.jwtPayload);
-
     localStorage.setItem('token', token);
   }
 
@@ -38,9 +80,5 @@ export class AuthService {
     if (token) {
       this.armazenarToken(token);
     }
-  }
-
-  temPermissao(permissao: string) {
-    return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
   }
 }

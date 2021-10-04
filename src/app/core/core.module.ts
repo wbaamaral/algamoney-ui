@@ -43,7 +43,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       },
     }),
   ],
-  exports: [NavbarComponent, ToastModule, ConfirmDialogModule],
+  exports: [ NavbarComponent, ToastModule, ConfirmDialogModule ],
   providers: [
     DatePipe,
     ErrorHandlerService,
