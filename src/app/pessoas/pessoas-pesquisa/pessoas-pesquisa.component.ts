@@ -1,17 +1,17 @@
-import { AuthService } from './../../seguranca/auth.service';
-import { Pessoa } from './../../core/model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 import {
+  ConfirmationService,
   LazyLoadEvent,
   MessageService,
-  ConfirmationService,
 } from 'primeng/api';
 
 import { PessoaService } from '../pessoa.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { IPessoa, IPessoaFiltro } from './../../core/interfaces';
+import { Pessoa } from './../../core/model';
+import { AuthService } from './../../seguranca/auth.service';
 
 @Component({
   selector: 'app-pessoas-pesquisa',

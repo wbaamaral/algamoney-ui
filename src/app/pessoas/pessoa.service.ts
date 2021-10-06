@@ -1,6 +1,6 @@
-import { IComboPessoa } from './../core/interfaces';
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
 
 import { IApiResponse, IPessoa, IPessoaFiltro } from '../core/interfaces';

@@ -1,16 +1,16 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 
-import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { LoginFormComponent } from './login-form/login-form.component';
-import { NaoAutorizadoComponent } from './nao-autorizado.component';
 import { MoneyHttpInterceptor } from './money-http-interceptor';
+import { NaoAutorizadoComponent } from './nao-autorizado.component';
+import { SegurancaRoutingModule } from './seguranca-routing.module';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token')!;

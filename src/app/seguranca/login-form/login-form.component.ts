@@ -1,7 +1,8 @@
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { AuthService } from './../auth.service';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-login-form',
@@ -26,11 +27,11 @@ export class LoginFormComponent implements OnInit {
       },
       (response: any) => {
         console.log(response);
-        let erro = response
+        let erro = response;
 
-        if (response.status === 400){
-          if (response.error.error === 'invalid_grant'){
-            erro = 'Usuário ou Senha Inválido'
+        if (response.status === 400) {
+          if (response.error.error === 'invalid_grant') {
+            erro = 'Usuário ou Senha Inválido';
           }
         }
         this.erroHandler.handle(erro);

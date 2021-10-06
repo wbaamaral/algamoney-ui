@@ -1,15 +1,15 @@
-import { AuthService } from './../../seguranca/auth.service';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MessageService } from 'primeng/api';
 
-import { IPessoa } from './../../core/interfaces';
 import { PessoaService } from '../pessoa.service';
-import { Pessoa } from './../../core/model';
 import { ErrorHandlerService } from './../../core/error-handler.service';
+import { IPessoa } from './../../core/interfaces';
+import { Pessoa } from './../../core/model';
+import { AuthService } from './../../seguranca/auth.service';
 
 @Component({
   selector: 'app-pessoa-cadastro',

@@ -1,7 +1,7 @@
 export class LancamentoFiltro {
-  descricao: string;
-  dataVencimentoInicio: Date;
-  dataVencimentoFim: Date;
+  descricao: string | undefined;
+  dataVencimentoInicio: Date | undefined;
+  dataVencimentoFim: Date | undefined;
   pagina = 0;
   itensPorPagina = 5;
 }
