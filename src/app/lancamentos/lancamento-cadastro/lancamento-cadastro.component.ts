@@ -11,7 +11,6 @@ import { ErrorHandlerService } from './../../core/error-handler.service';
 import { ILancamento, IPessoa } from './../../core/interfaces';
 import { Lancamento } from './../../core/model';
 import { PessoaService } from './../../pessoas/pessoa.service';
-import { AuthService } from './../../seguranca/auth.service';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -37,8 +36,7 @@ export class LancamentoCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title,
-    private auth: AuthService
+    private title: Title
   ) {}
 
   ngOnInit(): void {
@@ -55,10 +53,6 @@ export class LancamentoCadastroComponent implements OnInit {
 
   get editando() {
     return Boolean(this.lancamento.codigo);
-  }
-
-  temPermissao(role: string): boolean {
-    return this.auth.temPermissao(role);
   }
 
   carregarLancamento(codigo: number) {
@@ -110,6 +104,15 @@ export class LancamentoCadastroComponent implements OnInit {
         }));
       })
       .catch((error: any) => this.errorHandler.handle(error));
+
+      dados => {
+        this.pessoas = dados.content.map((dado: IPessoa) => ({label: dado.nome, value: dado.codigo}))
+      },
+      erro => {
+        this.errorHandler.handle(erro)
+      }
+    )
+
   }
 */
 

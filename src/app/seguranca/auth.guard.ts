@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (next.data.roles && !this.auth.temQualquerPermissao(next.data.roles)) {
+    if (next.data.roles && !this.auth.temPermissao(next.data.roles)) {
       this.router.navigate(['/nao-autorizado']);
       return false;
     }

@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
-
 import { IApiResponse, IPessoa, IPessoaFiltro } from '../core/interfaces';
 
 @Injectable({
@@ -25,13 +24,6 @@ export class PessoaService {
     return this.http.get<IApiResponse<IPessoa>>(`${this.pessoasUrl}`, {
       params,
     });
-  }
-
-  listarPessoasCombo() {
-    let urlCombo: string;
-    urlCombo = this.pessoasUrl + '?combo&listarTodos=true';
-
-    return this.http.get(`${urlCombo}`);
   }
 
   listarTodas(): Observable<IApiResponse<IPessoa>> {

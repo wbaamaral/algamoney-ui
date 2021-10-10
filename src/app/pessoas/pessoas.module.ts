@@ -31,9 +31,9 @@ import { PessoasRoutingModule } from './pessoas-routing.module';
     TableModule,
     TooltipModule,
     InputMaskModule,
-    PessoasRoutingModule,
 
     SharedModule,
+    PessoasRoutingModule,
   ],
   exports: [],
 })

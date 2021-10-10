@@ -6,7 +6,7 @@ import { PessoasPesquisaComponent } from './pessoas-pesquisa/pessoas-pesquisa.co
 
 const routes: Routes = [
   { path: 'pessoas', component: PessoasPesquisaComponent },
-  { path: 'pessoas/nova', component: PessoaCadastroComponent },
+  { path: 'pessoas/novo', component: PessoaCadastroComponent },
   { path: 'pessoas/:codigo', component: PessoaCadastroComponent },
 ];
 

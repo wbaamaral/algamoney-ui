@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +23,10 @@ export class AuthService {
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-    return this.http.post<void>(this.oauthTokenUrl, body, { headers });
+    return this.http.post<void>(this.oauthTokenUrl, body, {
+      headers,
+      withCredentials: true,
+    });
   }
 
   obterNovoAccessToken(): Observable<void> {
@@ -33,41 +36,14 @@ export class AuthService {
 
     const body = 'grant_type=refresh_token';
 
-    return this.http
-      .post<void>(this.oauthTokenUrl, body, { headers, withCredentials: true })
-      .pipe(
-        map((response: any) => {
-          console.log('Novo access token criado');
-
-          this.armazenarToken(response.access_token);
-          return response;
-        })
-      )
-      .pipe(
-        catchError((response) => {
-          console.error('Erro ao renovar token', response);
-          return throwError(null);
-        })
-      );
-  }
-
-  isAccessTokenInvalido() {
-    const token = localStorage.getItem('token');
-    return !token || this.jwtHelper.isTokenExpired(token);
+    return this.http.post<void>(this.oauthTokenUrl, body, {
+      headers,
+      withCredentials: true,
+    });
   }
 
   temPermissao(permissao: string) {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
-  }
-
-  temQualquerPermissao(roles: any) {
-    for (const role of roles) {
-      if (this.temPermissao(role)) {
-        return true;
-      }
-    }
-
-    return false;
   }
 
   public armazenarToken(token: string) {

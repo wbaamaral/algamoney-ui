@@ -9,7 +9,6 @@ import { PessoaService } from '../pessoa.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { IPessoa } from './../../core/interfaces';
 import { Pessoa } from './../../core/model';
-import { AuthService } from './../../seguranca/auth.service';
 
 @Component({
   selector: 'app-pessoa-cadastro',
@@ -25,29 +24,42 @@ export class PessoaCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title,
-    private auth: AuthService
+    private title: Title
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Inclusão de Pessoa');
     const codigoPessoa = this.route.snapshot.params['codigo'];
+
+    this.title.setTitle('Nova pessoa');
 
     if (codigoPessoa) {
       this.carregarPessoa(codigoPessoa);
-      this.atualizarTituloEdicao();
     }
   }
 
-  temPermissao(role: string): boolean {
-    return this.auth.temPermissao(role);
+  carregarPessoa(codigo: number) {
+    this.pessoaService.buscarPorCodigo(codigo).subscribe(
+      (pessoa) => {
+        this.pessoa = pessoa;
+        this.atualizarTituloEdicao();
+      },
+      (erro) => this.errorHandler.handle(erro)
+    );
   }
 
   get editando() {
     return Boolean(this.pessoa.codigo);
   }
 
-  salvar(pessoasForm: NgForm) {
+  salvar(form: NgForm) {
+    if (this.editando) {
+      this.atualizarPessoa(form);
+    } else {
+      this.adicionarPessoa(form);
+    }
+  }
+
+  adicionarPessoa(pessoasForm: NgForm) {
     this.pessoaService.adicionar(this.pessoa).subscribe(
       () => {
         this.messageService.add({
@@ -62,20 +74,7 @@ export class PessoaCadastroComponent implements OnInit {
     );
   }
 
-  carregarPessoa(codigo: number) {
-    this.pessoaService.buscarPorCodigo(codigo).subscribe(
-      (pessoaEncontrada) => {
-        this.pessoa = pessoaEncontrada;
-      },
-      (erro) => this.errorHandler.handle(erro)
-    );
-  }
-
-  atualizarTituloEdicao() {
-    this.title.setTitle(`Edição de pessoa: ${this.pessoa.nome}`);
-  }
-
-  atualizarPessoa(pessoaForm: NgForm) {
+  atualizarPessoa(pessoasForm: NgForm) {
     this.pessoaService.adicionar(this.pessoa).subscribe(
       (pessoa) => {
         this.pessoa = pessoa;
@@ -90,9 +89,12 @@ export class PessoaCadastroComponent implements OnInit {
     );
   }
 
-  novaPessoa(form: NgForm) {
+  nova(form: NgForm) {
     form.reset(new Pessoa());
-
     this.router.navigate(['/pessoas/nova']);
+  }
+
+  atualizarTituloEdicao() {
+    this.title.setTitle(`Edição de pessoa: ${this.pessoa.nome}`);
   }
 }

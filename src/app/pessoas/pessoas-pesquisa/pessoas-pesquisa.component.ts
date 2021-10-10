@@ -10,8 +10,6 @@ import {
 import { PessoaService } from '../pessoa.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { IPessoa, IPessoaFiltro } from './../../core/interfaces';
-import { Pessoa } from './../../core/model';
-import { AuthService } from './../../seguranca/auth.service';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -25,8 +23,6 @@ export class PessoasPesquisaComponent implements OnInit {
     itensPorPagina: 5,
   };
   pessoas: IPessoa[] = [];
-  pessoa: IPessoa = new Pessoa();
-
   @ViewChild('tabela') grid: any;
 
   constructor(
@@ -34,17 +30,13 @@ export class PessoasPesquisaComponent implements OnInit {
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private confirmationService: ConfirmationService,
-    private title: Title,
-    private auth: AuthService
+    private title: Title
   ) {}
 
   ngOnInit() {
     this.title.setTitle('Pesquisa de pessoas');
   }
 
-  temPermissao(role: string): boolean {
-    return this.auth.temPermissao(role);
-  }
   pesquisar(pagina: number = 0): void {
     this.filtro.pagina = pagina;
 

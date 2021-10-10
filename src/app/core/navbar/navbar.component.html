@@ -1,19 +1,23 @@
 <nav class="navbar">
 
-    <div class="container">
-        <div class="p-grid">
-            <div class="p-col-12">
-                <a href="javascript:;" class="navbar-toggle" (click)="exibindoMenu = !exibindoMenu"><i
-            class="pi pi-bars"></i></a>
-            </div>
-        </div>
+  <div class="container">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <a href="javascript:;" class="navbar-toggle" (click)="exibindoMenu = !exibindoMenu"><i class="pi pi-bars"></i></a>
+        <button type="button" (click)="criarNovoAccessToken()">Novo access token</button>
+      </div>
     </div>
+  </div>
 
-    <ul class="navbar-menu" [hidden]="!exibindoMenu">
-        <li class="navbar-usuario">{{ usuarioLogado }}</li>
-        <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="permiteAcesso('ROLE_PESQUISAR_LANCAMENTO')"><a routerLink="/lancamentos">Lançamentos</a></li>
-        <li class="navbar-menuitem" routerLinkActive="ativo"><a routerLink="/pessoas" *ngIf="permiteAcesso('ROLE_PESQUISAR_LANCAMENTO')">Pessoas</a></li>
-        <li class="navbar-menuitem"><a href="#">Logout</a></li>
-    </ul>
-
+  <ul class="navbar-menu" [hidden]="!exibindoMenu">
+    <li class="navbar-usuario">{{ usuarioLogado }}</li>
+    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="temPermissao('ROLE_PESQUISAR_LANCAMENTO')">
+      <a routerLink="/lancamentos">Lançamentos</a>
+    </li>
+    <li class="navbar-menuitem" routerLinkActive="ativo" *ngIf="temPermissao('ROLE_PESQUISAR_PESSOA')">
+      <a routerLink="/pessoas">Pessoas</a>
+    </li>
+    <li class="navbar-menuitem"><a href="#">Logout</a></li>
+  </ul>
+  
 </nav>
